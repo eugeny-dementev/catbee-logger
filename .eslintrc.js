@@ -205,7 +205,8 @@ module.exports = {
     'spaced-comment': [2, 'always'],
     'wrap-regex': 0,
 
-    'no-var': 0,
+    'prefer-const': 2,
+    'no-var': 2,
     'generator-star': 0,
 
     'max-depth': [2, 4],
