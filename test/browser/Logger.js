@@ -15,8 +15,7 @@ experiment('browser/Logger', () => {
     locator = new ServiceLocator();
     locator.registerInstance('serviceLocator', locator);
     locator.registerInstance('config', {});
-    const config = locator.resolve('config');
-    locator.register('logger', Logger, config, true);
+    locator.register('logger', Logger, true);
     logger = locator.resolve('logger');
 
     done();

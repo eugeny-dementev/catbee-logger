@@ -1,11 +1,10 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 7,
+    ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: false,
       globalReturn: false,
-      experimentalObjectRestSpread: true,
       binaryLiterals: true,
       blockBindings: true,
       defaultParams: true,
