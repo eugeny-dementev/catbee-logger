@@ -1,4 +1,4 @@
-const Logger = require('./dist/lib/Logger');
+const Logger = require('./lib/Logger');
 
 module.exports = {
   /**

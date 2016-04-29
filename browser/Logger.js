@@ -8,10 +8,24 @@ const LoggerBase = require('../lib/base/LoggerBase');
  * @constructor
  */
 class Logger extends LoggerBase {
-  constructor ($serviceLocator) {
+  constructor (locator) {
     super();
 
-    this._config = $serviceLocator.resolve('config');
+    /**
+     * Browser logger transports.
+     *
+     * @type {Array}
+     * @private
+     */
+    this._transports = [];
+
+    /**
+     * Catbee logger config reference
+     *
+     * @type {Object}
+     * @private
+     */
+    this._config = locator.resolve('config');
     this._config.logger = this._config.logger || {};
 
     this.addEnrichment((log) => {
@@ -30,22 +44,6 @@ class Logger extends LoggerBase {
     this.fatal = this.fatal.bind(this);
     this.onerror = this.onerror.bind(this);
   }
-
-  /**
-   * Catbee logger config reference
-   *
-   * @type {Object}
-   * @private
-   */
-  _config = null;
-
-  /**
-   * Browser logger transports.
-   *
-   * @type {Array}
-   * @private
-   */
-  _transports = [];
 
   /**
    * Add log messages transport.
