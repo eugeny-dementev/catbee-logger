@@ -11,8 +11,9 @@
     "service"
   ],
   "license": "MIT",
-  "main": "./dist/index.js",
+  "main": "./index.js",
   "browser": {
+    "./index.js": "./dist/index.js",
     "./lib/Logger.js": "./browser/Logger.js"
   },
   "engines": {
@@ -37,7 +38,7 @@
   "scripts": {
     "eslint": "eslint .",
     "test": "lab -T node_modules/babel-lab test -l",
-    "build": "babel browser -d dist/browser && babel index.js -o dist/index.js",
+    "build": "babel browser -d dist/browser && babel index.js -o dist/index.js && babel lib/base -d dist/lib/base",
     "prepublish": "npm run build"
   }
 }
