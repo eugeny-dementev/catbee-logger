@@ -1,5 +1,8 @@
-*
-!dist/
-!lib/
-!index.js
-!package.json
+browser/
+test/
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc.js
+.gitignore
+.npmignore
