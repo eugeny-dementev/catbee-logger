@@ -24,4 +24,4 @@ pids
 *.seed
 
 # Coverage directory used by tools like istanbul
-coverage/
+codecov.html
