@@ -4,7 +4,7 @@ const { experiment, test, beforeEach } = lab;
 
 const assert = require('assert');
 
-const LoggerBase = require('../../../lib/base/LoggerBase');
+const LoggerBase = require('../../../src/lib/base/LoggerBase');
 
 experiment('lib/base/LoggerBase', () => {
   experiment('#_enrichments', () => {

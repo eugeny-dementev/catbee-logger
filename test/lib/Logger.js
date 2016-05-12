@@ -5,7 +5,7 @@ const { experiment, test, beforeEach } = lab;
 const assert = require('assert');
 const ServiceLocator = require('catberry-locator');
 
-const Logger = require('../../lib/Logger');
+const Logger = require('../../src/lib/Logger');
 
 experiment('lib/Logger', () => {
   let locator:ServiceLocator = null;
