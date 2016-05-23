@@ -7,7 +7,11 @@ module.exports = {
    */
   register (locator) {
     const config = locator.resolve('config');
+    locator.register('logger', Logger, true);
 
-    locator.register('logger', Logger, config, true);
+    const bus = locator.resolve('eventBus');
+    const logger = locator.resolve('logger');
+
+    bus.on('error', (error) => logger.error(error));
   }
 };

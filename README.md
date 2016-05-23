@@ -41,6 +41,9 @@ Send your log object to every added transports
   logger.addTransport(grayLog2, grayLogOptions);
 ```
 
+## eventBus errors
+logger in register method automatic subscribe to `error` event in eventBus
+
 [travis-img]: https://travis-ci.org/catbee/catbee-logger.svg?branch=master
 [travis-url]: https://travis-ci.org/catbee/catbee-logger
 
