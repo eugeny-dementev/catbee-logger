@@ -3,73 +3,70 @@
 [![Build Status][travis-img]][travis-url]
 [![Code Coverage][codecov-img]][codecov-url]
 
-## Logger for catbee with enrichments and transports
-``` js
-  const loggerService = require('catbee-logger');
-  loggerService.register(serviceLocator);
+### Logger for catbee with enrichments and transports
 
-  const logger = serviceLocator.resolve('logger');
+# Installation
+``` 
+  npm install catbee-logger 
 ```
 
-### Levels
-- debug
-- trace
-- info
-- warn
-- error
-- fatal
+# Usage
 
-Each level presented as function.
-For error and fatal interface is:
 ``` js
-/**
- * @param {string|Object|Error} message
- * @param {Object|undefined} meta
- */
-function error (message, meta = {}) {}
-function fatal (message, meta = {}) {}
+const loggerService = require('catbee-logger');
+loggerService.register(serviceLocator);
+
+const logger = serviceLocator.resolve('logger');
 ```
-And for debug, trace, info and warn interface is:
+
+### Send log messages
+
 ``` js
-/**
- * @param {string} message
- * @param {Object|undefined} meta
- */
-function debug (message, meta = {}) {}
-function trace (message, meta = {}) {}
-function info (message, meta = {}) {}
-function warn (message, meta = {}) {}
+logger.error('Error message');
+logger.error('Error message', { one: '1', two: 3 });
+logger.error(new Error('message')); // for stack trace
+
+logger.fatal('Fatal message', { woooow: 'wat?' });
+logger.fatal('Fatal message', { woooow: 'wat?' });
+logger.fatal(new Error('Fatal error')); // for stack trace
+
+// only fatal and error methods can take Error instance to first arguments
+
+logger.debug('message', { one: '1', two: 3 });
+logger.trace('message', { one: '1', two: 3 });
+logger.info('message', { one: '1', two: 3 });
+logger.warn('message', { one: '1', two: 3 });
 ```
 
 ### Enricments
-Every log object can be enrich and unenrich with whatever you want. Just add function for it:
+Every log object can be enrich and unenrich. All enrichments are just function with log object in first argument and current message log level in second.
 ``` js
-  const enrichment = (log, level) => log.from = 'Browser';
-  logger.addEnrichment(enrichment);
-  logger.removeEnrichment(enrichment);
-  logger.dropEnrichments(); // remove all enrichments
+const enrichment = (log, level) => log.from = 'Browser';
+logger.addEnrichment(enrichment);
+logger.removeEnrichment(enrichment);
+logger.dropEnrichments(); // remove all enrichments
 ```
 
 ### Transports
-Send your log object to every added transports
+Send your log object to every added transports. Transports in browser is functions with log level in first argument and log object in second. Server transports are [transports for winston logger](https://github.com/winstonjs/winston/blob/master/docs/transports.md)
 ``` js
-  // browser.js
-  const browserTransport =  (level, log) => { // send log to server or any }
-  logger.addTransport(browserTransport);
-  logger.removeTransport(browserTransport);
+// browser.js
+const browserTransport =  (level, log) => { // send log to server or any }
+logger.addTransport(browserTransport);
+logger.removeTransport(browserTransport);
 
-  // server.js
-  // server logger is a winston wrapper and logger.addTransport = winstonLogger.add
-  logger.addTransport(grayLog2, grayLogOptions);
-  // server logger is a winston wrapper and logger.removeTransport = winstonLogger.remove
-  logger.removeTransport(grayLog2);
+// server.js
+// server logger is a winston wrapper and logger.addTransport = winstonLogger.add
+logger.addTransport(grayLog2, grayLogOptions);
+// server logger is a winston wrapper and logger.removeTransport = winstonLogger.remove
+logger.removeTransport(grayLog2);
 
 
-  logger.dropTransports(); // remove all transports from logger
+logger.dropTransports(); // remove all transports from logger
 ```
 
-## eventBus errors
-logger in register method automatic subscribe to `error` event in eventBus
+# Errors
+Catbee inself have event bus for system information event, which includes `error` event. logger in register method automatic subscribe to `error` event.
 
 [travis-img]: https://travis-ci.org/catbee/catbee-logger.svg?branch=master
 [travis-url]: https://travis-ci.org/catbee/catbee-logger
