@@ -71,85 +71,85 @@ class Logger extends LoggerBase {
   /**
    * Logs debug message.
    *
-   * @param {string|Object|Error} error
+   * @param {string} message
    * @param {Object|undefined} meta
    */
-  debug (error, meta = {}) {
+  debug (message, meta = {}) {
     if (!this._levels.debug) {
       return;
     }
 
-    this._message('debug', error, meta);
+    this._message('debug', message, meta);
   }
 
   /**
    * Logs trace message.
    *
-   * @param {string|Object|Error} error
+   * @param {string} message
    * @param {Object|undefined} meta
    */
-  trace (error, meta = {}) {
+  trace (message, meta = {}) {
     if (!this._levels.trace) {
       return;
     }
 
-    this._message('trace', error, meta);
+    this._message('trace', message, meta);
   }
 
   /**
    * Logs info message.
    *
-   * @param {string|Object|Error} error
+   * @param {string} message
    * @param {Object|undefined} meta
    */
-  info (error, meta = {}) {
+  info (message, meta = {}) {
     if (!this._levels.info) {
       return;
     }
 
-    this._message('info', error, meta);
+    this._message('info', message, meta);
   }
 
   /**
    * Logs warn message.
    *
-   * @param {string|Object|Error} error
+   * @param {string} message
    * @param {Object|undefined} meta
    */
-  warn (error, meta = {}) {
+  warn (message, meta = {}) {
     if (!this._levels.warn) {
       return;
     }
 
-    this._message('warn', error, meta);
+    this._message('warn', message, meta);
   }
 
   /**
    * Logs error message.
    *
-   * @param {string|Object|Error} error
+   * @param {string|Error} message
    * @param {Object|undefined} meta
    */
-  error (error, meta = {}) {
+  error (message, meta = {}) {
     if (!this._levels.error) {
       return;
     }
 
-    this._error('error', error, meta);
+    this._error('error', message, meta);
   }
 
   /**
    * Logs fatal message.
    *
-   * @param {string|Object|Error} error
+   * @param {string|Error} message
    * @param {Object|undefined} meta
    */
-  fatal (error, meta = {}) {
+  fatal (message, meta = {}) {
     if (!this._levels.fatal) {
       return;
     }
 
-    this._error('fatal', error, meta);
+    this._error('fatal', message, meta);
   }
 }
 

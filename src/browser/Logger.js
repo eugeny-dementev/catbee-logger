@@ -98,7 +98,7 @@ class Logger extends LoggerBase {
   /**
    * Logs trace message.
    *
-   * @param {string|Object|Error} message Error object or message.
+   * @param {string} message Error object or message.
    * @param {Object|undefined} meta
    */
   trace (message, meta = {}) {
@@ -111,7 +111,7 @@ class Logger extends LoggerBase {
 
   /**
    * Logs trace message.
-   * @param {string|Object|Error} message Error object or message.
+   * @param {string} message Error object or message.
    * @param {Object|undefined} meta
    */
   debug (message, meta = {}) {
@@ -139,7 +139,7 @@ class Logger extends LoggerBase {
   /**
    * Logs warn message.
    *
-   * @param {string|Object|Error} message Error object or message.
+   * @param {string} message Error object or message.
    * @param {Object|undefined} meta
    */
   warn (message, meta = {}) {
@@ -153,7 +153,7 @@ class Logger extends LoggerBase {
   /**
    * Logs error message.
    *
-   * @param {string|Object|Error} message Error object or message.
+   * @param {string|Error} message Error object or message.
    * @param {Object|undefined} meta
    */
   error (message, meta = {}) {
@@ -166,7 +166,7 @@ class Logger extends LoggerBase {
 
   /**
    * Logs error message.
-   * @param {string|Object|Error} message Error object or message.
+   * @param {string|Error} message Error object or message.
    * @param {Object|undefined} meta
    */
   fatal (message, meta = {}) {
