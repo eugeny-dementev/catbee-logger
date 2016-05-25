@@ -3,7 +3,7 @@
 [![Build Status][travis-img]][travis-url]
 [![Code Coverage][codecov-img]][codecov-url]
 
-### Logger for catbee with enrichments and transports
+Logger for catbee with enrichments and transports
 
 ## Installation
 ``` 
