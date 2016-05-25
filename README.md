@@ -30,7 +30,7 @@ logger.fatal('Fatal message', { woooow: 'wat?' });
 logger.fatal('Fatal message', { woooow: 'wat?' });
 logger.fatal(new Error('Fatal error')); // for stack trace
 
-// only fatal and error methods can take Error instance to first arguments
+// only fatal and error methods can take Error instance as a first arguments
 
 logger.debug('message', { one: '1', two: 3 });
 logger.trace('message', { one: '1', two: 3 });
