@@ -5,12 +5,12 @@
 
 ### Logger for catbee with enrichments and transports
 
-# Installation
+## Installation
 ``` 
   npm install catbee-logger 
 ```
 
-# Usage
+## Usage
 
 ``` js
 const loggerService = require('catbee-logger');
@@ -65,7 +65,7 @@ logger.removeTransport(grayLog2);
 logger.dropTransports(); // remove all transports from logger
 ```
 
-# Errors
+## Errors
 Catbee inself have event bus for system information event, which includes `error` event. logger in register method automatic subscribe to `error` event.
 
 [travis-img]: https://travis-ci.org/catbee/catbee-logger.svg?branch=master
