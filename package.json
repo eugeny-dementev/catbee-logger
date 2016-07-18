@@ -1,7 +1,7 @@
 {
   "name": "catbee-logger",
   "author": "Eugeny Dementev",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Logger service for catbee",
   "keywords": [
     "catbee",
