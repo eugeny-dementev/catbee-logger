@@ -9,7 +9,7 @@ const LoggerBase = require('../../../src/lib/base/LoggerBase');
 experiment('lib/base/LoggerBase', () => {
   experiment('#_enrichments', () => {
     test('should be an array', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       assert(Array.isArray(logger._enrichments));
 
@@ -17,7 +17,7 @@ experiment('lib/base/LoggerBase', () => {
     });
 
     test('should be empty array by default', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       assert.deepEqual([], logger._enrichments);
 
@@ -27,7 +27,7 @@ experiment('lib/base/LoggerBase', () => {
 
   experiment('#addEnrichment', () => {
     test('should add enrichment function to _enrichments array', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       const another = () => {};
 
@@ -42,7 +42,7 @@ experiment('lib/base/LoggerBase', () => {
     });
 
     test('should throw TypeError if enrichment is not a function', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       assert.throws(() => {
         logger.addEnrichment('');
@@ -54,7 +54,7 @@ experiment('lib/base/LoggerBase', () => {
 
   experiment('#dropEnrichments', () => {
     test('should clean up all current enrichments', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       const another = () => {};
 
@@ -73,7 +73,7 @@ experiment('lib/base/LoggerBase', () => {
 
   experiment('#removeEnrichment', () => {
     test('should delete one enrichment by link on it', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       const another = () => {};
 
@@ -95,7 +95,7 @@ experiment('lib/base/LoggerBase', () => {
 
   experiment('#_enrichLog', () => {
     test('should enrich log', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       const expected = {
         data: 'some data'
@@ -116,7 +116,7 @@ experiment('lib/base/LoggerBase', () => {
   });
 
   experiment('#_setLevels', () => {
-    let logger:LoggerBase = null;
+    let logger = null;
 
     beforeEach((done) => {
       logger = new LoggerBase();
@@ -164,7 +164,7 @@ experiment('lib/base/LoggerBase', () => {
   });
 
   experiment('#_errorFormatter', () => {
-    let logger:LoggerBase = null;
+    let logger = null;
 
     beforeEach((done) => {
       logger = new LoggerBase();
@@ -234,7 +234,7 @@ experiment('lib/base/LoggerBase', () => {
 
   experiment('#_send', () => {
     test('should throw error if .log method is not realized in inheritor', (done) => {
-      const logger:LoggerBase = new LoggerBase();
+      const logger = new LoggerBase();
 
       assert.throws(() => logger._send(), ReferenceError);
 
