@@ -1,6 +1,4 @@
-browser/
 test/
-.babelrc
 .editorconfig
 .eslintignore
 .eslintrc.js
