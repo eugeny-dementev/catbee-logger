@@ -8,8 +8,8 @@ const ServiceLocator = require('catberry-locator');
 const Logger = require('../../src/lib/Logger');
 
 experiment('lib/Logger', () => {
-  let locator:ServiceLocator = null;
-  let logger:Logger = null;
+  let locator = null;
+  let logger = null;
 
   beforeEach((done) => {
     locator = new ServiceLocator();
