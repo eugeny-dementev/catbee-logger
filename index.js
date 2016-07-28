@@ -8,9 +8,20 @@ module.exports = {
   register (locator) {
     locator.register('logger', Logger, true);
 
-    const bus = locator.resolve('eventBus');
+    const eventBus = locator.resolve('eventBus');
     const logger = locator.resolve('logger');
 
-    bus.on('error', (error) => logger.error(error));
+    eventBus
+      .on('error', (error) => logger.error(error))
+      .on('serverRequest', ({ requestInfo = {} }) => {
+        const { method, uriPath, address, port } = requestInfo;
+
+        logger.trace(`Request to ${method} "${uriPath}" from ${address}:${port}`);
+      })
+      .on('serverRequestFinish', ({ requestInfo = {}, requestDuration = -1 }) => {
+        const { method, uriPath, address, port } = requestInfo;
+
+        logger.trace(`Response from ${method} "${uriPath}" to ${address}:${port} (${requestDuration})`);
+      });
   }
 };
