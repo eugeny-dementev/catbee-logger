@@ -1,3 +1,4 @@
+const prettyHrtime = require('pretty-hrtime');
 const Logger = require('./lib/Logger');
 
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
       .on('serverRequestFinish', ({ requestInfo = {}, requestDuration = -1 }) => {
         const { method, uriPath, address, port } = requestInfo;
 
-        logger.trace(`Response from ${method} "${uriPath}" to ${address}:${port} (${requestDuration})`);
+        logger.trace(`Response from ${method} "${uriPath}" to ${address}:${port} (${prettyHrtime(requestDuration)})`);
       });
   }
 };
