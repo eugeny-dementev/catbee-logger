@@ -1,10 +1,10 @@
 {
-  "name": "catbee-logger",
+  "name": "shlyager",
   "author": "Eugeny Dementev",
-  "version": "3.2.1",
-  "description": "Logger service for catbee",
+  "version": "0.0.3",
+  "description": "Isomorphic logger",
   "keywords": [
-    "catbee",
+    "shlyager",
     "logger",
     "log",
     "locator",
@@ -24,9 +24,7 @@
     "winston-console-formatter": "^0.3.1"
   },
   "devDependencies": {
-    "catberry-locator": "^2.0.0",
     "codecov.io": "^0.1.6",
-    "eslint": "^2.8.0",
     "lab": "^10.3.1"
   },
   "scripts": {
