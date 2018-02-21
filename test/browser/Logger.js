@@ -1,5 +1,5 @@
 const Lab = require('lab');
-const lab = exports.lab = Lab.script();
+const lab = (exports.lab = Lab.script());
 const { experiment, test, beforeEach } = lab;
 
 const sinon = require('sinon');
@@ -36,7 +36,7 @@ experiment('browser/Logger', () => {
     test('should add transport', () => {
       logger.dropTransports();
 
-      function transport () {}
+      function transport() {}
 
       logger.addTransport(transport);
 

@@ -3,11 +3,7 @@
   "author": "Eugeny Dementev",
   "version": "1.0.0",
   "description": "Isomorphic logger",
-  "keywords": [
-    "shlyager",
-    "logger",
-    "log"
-  ],
+  "keywords": ["shlyager", "logger", "log"],
   "engines": {
     "node": ">=6"
   },
@@ -19,12 +15,19 @@
   },
   "devDependencies": {
     "codecov.io": "^0.1.6",
+    "husky": "^0.14.3",
     "lab": "^15.2.2",
+    "lint-staged": "^6.1.1",
+    "prettier": "1.10.2",
     "sinon": "^4.3.0"
   },
   "scripts": {
     "test": "lab test -l",
     "codecov": "lab test -l -r lcov | codecov",
-    "test-cov-html": "lab test -l -r html -o codecov.html"
+    "test-cov-html": "lab test -l -r html -o codecov.html",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   }
 }

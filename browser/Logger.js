@@ -8,7 +8,7 @@ const LoggerBase = require('../lib/base/LoggerBase');
  * @constructor
  */
 class Logger extends LoggerBase {
-  constructor (options = {}) {
+  constructor(options = {}) {
     super(options);
 
     /**
@@ -27,7 +27,7 @@ class Logger extends LoggerBase {
    *
    * @param {function} transport
    */
-  addTransport (transport) {
+  addTransport(transport) {
     if (typeof transport !== 'function') {
       throw new TypeError('Transport must be a function');
     }
@@ -40,7 +40,7 @@ class Logger extends LoggerBase {
    *
    * @param {function} transport
    */
-  removeTransport (transport) {
+  removeTransport(transport) {
     const index = this._transports.indexOf(transport);
 
     if (index === -1) {
@@ -51,11 +51,11 @@ class Logger extends LoggerBase {
     this._transports.splice(index, 1);
   }
 
-  dropTransports () {
+  dropTransports() {
     this._transports = [];
   }
 
-  bindWindowListener () {
+  bindWindowListener() {
     window.addEventListener('error', this.onerror);
   }
 
@@ -68,11 +68,11 @@ class Logger extends LoggerBase {
    * @param {Number} colno - column number
    * @param {String} filename - script
    */
-  onerror ({ message, filename, lineno, colno, error }) {
+  onerror({ message, filename, lineno, colno, error }) {
     this._send('error', message, {
       stack: error.stack,
       filename: filename,
-      line: `${lineno}:${colno}`
+      line: `${lineno}:${colno}`,
     });
   }
 
@@ -83,8 +83,8 @@ class Logger extends LoggerBase {
    * @param {string} level
    * @param {Object} log
    */
-  _log (level, log) {
-    this._transports.forEach((transport) => transport(level, log));
+  _log(level, log) {
+    this._transports.forEach(transport => transport(level, log));
   }
 }
 

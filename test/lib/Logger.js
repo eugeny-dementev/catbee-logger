@@ -1,5 +1,5 @@
 const Lab = require('lab');
-const lab = exports.lab = Lab.script();
+const lab = (exports.lab = Lab.script());
 const { experiment, test, beforeEach } = lab;
 
 const assert = require('assert');
