@@ -23,8 +23,7 @@
     "sinon": "^4.3.0"
   },
   "scripts": {
-    "eslint": "eslint .",
-    "test": "lab test2 -l",
+    "test": "lab test -l",
     "codecov": "lab test -l -r lcov | codecov",
     "test-cov-html": "lab test -l -r html -o codecov.html"
   }
