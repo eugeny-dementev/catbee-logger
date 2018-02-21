@@ -156,6 +156,23 @@ experiment('Base', () => {
 
       assert.throws(() => logger._send(), ReferenceError);
     });
+
+    experiment('level option', () => {
+      const levels = Object.keys(LoggerBase.defaultLevels);
+
+      levels
+        .forEach((level, index) => {
+          test(`${level} level`, () => {
+            const logger = new LoggerBase({ level });
+
+            sandbox.stub(logger, '_log');
+
+            levels.forEach((name) => logger[name]('message'));
+
+            sinon.assert.callCount(logger._log, index + 1);
+          });
+        });
+    });
   });
 
   experiment('#_prepareLog', () => {
