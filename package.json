@@ -1,35 +1,30 @@
 {
   "name": "shlyager",
   "author": "Eugeny Dementev",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Isomorphic logger",
   "keywords": [
     "shlyager",
     "logger",
-    "log",
-    "locator",
-    "service"
+    "log"
   ],
   "engines": {
     "node": ">=6"
   },
   "license": "MIT",
-  "main": "index.js",
-  "browser": {
-    "./lib/Logger.js": "./browser/Logger.js"
-  },
+  "main": "./lib/Logger.js",
+  "browser": "./browser/Logger.js",
   "dependencies": {
-    "pretty-hrtime": "^1.0.2",
-    "winston": "^2.1.1",
-    "winston-console-formatter": "^0.3.1"
+    "winston": "^2.4.0"
   },
   "devDependencies": {
     "codecov.io": "^0.1.6",
-    "lab": "^10.3.1"
+    "lab": "^15.2.2",
+    "sinon": "^4.3.0"
   },
   "scripts": {
     "eslint": "eslint .",
-    "test": "lab test -l",
+    "test": "lab test2 -l",
     "codecov": "lab test -l -r lcov | codecov",
     "test-cov-html": "lab test -l -r html -o codecov.html"
   }
