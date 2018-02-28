@@ -23,3 +23,6 @@ pids
 
 # Coverage directory used by tools like istanbul
 codecov.html
+
+# build
+dist/

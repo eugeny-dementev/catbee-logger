@@ -5,7 +5,7 @@ const { experiment, test, beforeEach } = lab;
 const sinon = require('sinon');
 const assert = require('assert');
 
-const Logger = require('../../browser/Logger');
+const Logger = require('../dist/BrowserLogger');
 
 experiment('browser/Logger', () => {
   let logger = null;

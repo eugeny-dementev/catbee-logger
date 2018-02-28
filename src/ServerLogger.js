@@ -1,5 +1,5 @@
 const winston = require('winston');
-const LoggerBase = require('./base/LoggerBase');
+const LoggerBase = require('./LoggerBase');
 
 /**
  * Creates server logger.

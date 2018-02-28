@@ -5,7 +5,7 @@ const { experiment, test, afterEach } = lab;
 const sinon = require('sinon');
 const assert = require('assert');
 
-const LoggerBase = require('../../../lib/base/LoggerBase');
+const LoggerBase = require('../dist/LoggerBase');
 
 experiment('Base', () => {
   const sandbox = sinon.createSandbox();

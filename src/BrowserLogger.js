@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-const LoggerBase = require('../lib/base/LoggerBase');
+const LoggerBase = require('./LoggerBase');
 
 /**
  * Creates browser logger.

@@ -4,7 +4,7 @@ const { experiment, test, beforeEach } = lab;
 
 const assert = require('assert');
 
-const Logger = require('../../lib/Logger');
+const Logger = require('../dist/ServerLogger');
 
 experiment('./lib/Logger', () => {
   let logger = null;
