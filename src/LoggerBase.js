@@ -1,3 +1,5 @@
+const serializeError = require("serialize-error");
+
 /**
  * Basic functionality for loggers
  *
@@ -8,7 +10,7 @@ class LoggerBase {
   constructor(options) {
     this._config = options || {};
     this._levels = this._config.levels || LoggerBase.defaultLevels;
-    this._level = this._config.level || 'warn';
+    this._level = this._config.level || "warn";
 
     this._prepareShortcuts();
 
@@ -28,7 +30,7 @@ class LoggerBase {
       info: 2,
       verbose: 3,
       debug: 4,
-      silly: 5,
+      silly: 5
     };
   }
 
@@ -43,8 +45,8 @@ class LoggerBase {
    * @param {function} enrichment
    */
   addEnrichment(enrichment) {
-    if (typeof enrichment !== 'function') {
-      throw new TypeError('Enrichment must be a function');
+    if (typeof enrichment !== "function") {
+      throw new TypeError("Enrichment must be a function");
     }
 
     this._enrichments.push(enrichment);
@@ -59,7 +61,7 @@ class LoggerBase {
     const index = this._enrichments.indexOf(enrichment);
 
     if (index === -1) {
-      this.log('info', 'Enrichment not found. Remove nothing');
+      this.log("info", "Enrichment not found. Remove nothing");
       return;
     }
 
@@ -107,12 +109,14 @@ class LoggerBase {
 
   _prepareLog(message, meta = {}) {
     const log = {};
-    if (message && typeof message === 'object') {
+    if (message instanceof Error) {
+      Object.assign(log, serializeError(message));
+    } else if (message && typeof message === "object") {
       Object.assign(log, message);
-    } else if (typeof message === 'string') {
+    } else if (typeof message === "string") {
       Object.assign(log, { message }, meta);
     } else {
-      throw new TypeError('Wrong arguments');
+      throw new TypeError("Wrong arguments");
     }
 
     return log;
@@ -120,7 +124,7 @@ class LoggerBase {
 
   _log() {
     throw new ReferenceError(
-      'Logger must realize log(level: string, log: Object) method'
+      "Logger must realize log(level: string, log: Object) method"
     );
   }
 

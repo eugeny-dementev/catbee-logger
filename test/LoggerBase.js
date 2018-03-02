@@ -1,21 +1,22 @@
-const Lab = require('lab');
-const lab = exports.lab = Lab.script();
+const Lab = require("lab");
+const lab = (exports.lab = Lab.script());
 const { experiment, test, afterEach } = lab;
 
-const sinon = require('sinon');
-const assert = require('assert');
+const sinon = require("sinon");
+const assert = require("assert");
+const serializeError = require("serialize-error");
 
-const LoggerBase = require('../dist/LoggerBase');
+const LoggerBase = require("../dist/LoggerBase");
 
-experiment('Base', () => {
+experiment("Base", () => {
   const sandbox = sinon.createSandbox();
 
   afterEach(() => {
     sandbox.restore();
   });
 
-  experiment('#defaultLevels', () => {
-    test('default levels static field', () => {
+  experiment("#defaultLevels", () => {
+    test("default levels static field", () => {
       assert.deepEqual(LoggerBase.defaultLevels, {
         error: 0,
         warn: 1,
@@ -26,36 +27,36 @@ experiment('Base', () => {
       });
     });
 
-    test('default level shortcuts functions', () => {
+    test("default level shortcuts functions", () => {
       const logger = new LoggerBase();
 
-      Object
-        .keys(LoggerBase.defaultLevels)
-        .forEach((level) => assert.equal(typeof logger[level], 'function'));
+      Object.keys(LoggerBase.defaultLevels).forEach(level =>
+        assert.equal(typeof logger[level], "function")
+      );
     });
   });
 
-  experiment('#_enrichments', () => {
-    test('should be an array', () => {
+  experiment("#_enrichments", () => {
+    test("should be an array", () => {
       const logger = new LoggerBase();
 
       assert(Array.isArray(logger._enrichments));
     });
 
-    test('should be empty array by default', () => {
+    test("should be empty array by default", () => {
       const logger = new LoggerBase();
 
       assert.deepEqual([], logger._enrichments);
     });
   });
 
-  experiment('#addEnrichment', () => {
-    test('should add enrichment function to _enrichments array', () => {
+  experiment("#addEnrichment", () => {
+    test("should add enrichment function to _enrichments array", () => {
       const logger = new LoggerBase();
 
       const another = () => {};
 
-      function enrichment () {}
+      function enrichment() {}
 
       logger.addEnrichment(enrichment);
       logger.addEnrichment(another);
@@ -63,22 +64,22 @@ experiment('Base', () => {
       assert.deepEqual([enrichment, another], logger._enrichments);
     });
 
-    test('should throw TypeError if enrichment is not a function', () => {
+    test("should throw TypeError if enrichment is not a function", () => {
       const logger = new LoggerBase();
 
       assert.throws(() => {
-        logger.addEnrichment('');
+        logger.addEnrichment("");
       }, TypeError);
     });
   });
 
-  experiment('#dropEnrichments', () => {
-    test('should clean up all current enrichments', () => {
+  experiment("#dropEnrichments", () => {
+    test("should clean up all current enrichments", () => {
       const logger = new LoggerBase();
 
       const another = () => {};
 
-      function enrichment () {}
+      function enrichment() {}
 
       logger.addEnrichment(enrichment);
       logger.addEnrichment(another);
@@ -89,15 +90,15 @@ experiment('Base', () => {
     });
   });
 
-  experiment('#removeEnrichment', () => {
-    test('should delete one enrichment by link on it', () => {
+  experiment("#removeEnrichment", () => {
+    test("should delete one enrichment by link on it", () => {
       const logger = new LoggerBase();
 
       const another = () => {};
 
-      function enrichment () {}
+      function enrichment() {}
 
-      function enrich () {}
+      function enrich() {}
 
       logger.addEnrichment(enrichment);
       logger.addEnrichment(another);
@@ -109,15 +110,15 @@ experiment('Base', () => {
     });
   });
 
-  experiment('#_enrichLog', () => {
-    test('should enrich log', () => {
+  experiment("#_enrichLog", () => {
+    test("should enrich log", () => {
       const logger = new LoggerBase();
 
       const expected = {
-        data: 'some data'
+        data: "some data"
       };
 
-      logger.addEnrichment((log) => {
+      logger.addEnrichment(log => {
         log.data = expected.data;
       });
 
@@ -129,16 +130,16 @@ experiment('Base', () => {
     });
   });
 
-  experiment('#_send', () => {
-    test('should prepare, enrich and log', () => {
-      const level = 'error';
-      const message = 'hello';
+  experiment("#_send", () => {
+    test("should prepare, enrich and log", () => {
+      const level = "error";
+      const message = "hello";
       const meta = { one: 1 };
 
       const logger = new LoggerBase();
-      sandbox.stub(logger, '_prepareLog').returns(meta);
-      sandbox.stub(logger, '_enrichLog');
-      sandbox.stub(logger, '_log');
+      sandbox.stub(logger, "_prepareLog").returns(meta);
+      sandbox.stub(logger, "_enrichLog");
+      sandbox.stub(logger, "_log");
 
       logger._send(level, message, meta);
 
@@ -150,34 +151,33 @@ experiment('Base', () => {
       sinon.assert.calledWith(logger._log, level, meta);
     });
 
-    test('throw error if ._log method is not realized in inheritor', () => {
+    test("throw error if ._log method is not realized in inheritor", () => {
       const logger = new LoggerBase();
-      sandbox.stub(logger, '_prepareLog');
+      sandbox.stub(logger, "_prepareLog");
 
       assert.throws(() => logger._send(), ReferenceError);
     });
 
-    experiment('level option', () => {
+    experiment("level option", () => {
       const levels = Object.keys(LoggerBase.defaultLevels);
 
-      levels
-        .forEach((level, index) => {
-          test(`${level} level`, () => {
-            const logger = new LoggerBase({ level });
+      levels.forEach((level, index) => {
+        test(`${level} level`, () => {
+          const logger = new LoggerBase({ level });
 
-            sandbox.stub(logger, '_log');
+          sandbox.stub(logger, "_log");
 
-            levels.forEach((name) => logger[name]('message'));
+          levels.forEach(name => logger[name]("message"));
 
-            sinon.assert.callCount(logger._log, index + 1);
-          });
+          sinon.assert.callCount(logger._log, index + 1);
         });
+      });
     });
   });
 
-  experiment('#_prepareLog', () => {
+  experiment("#_prepareLog", () => {
     test('logger.error("message")', () => {
-      const message = 'hello';
+      const message = "hello";
 
       const logger = new LoggerBase();
       const log = logger._prepareLog(message);
@@ -186,8 +186,8 @@ experiment('Base', () => {
     });
 
     test('logger.error("message", { v })', () => {
-      const message = 'hello';
-      const meta = { v: 'v' };
+      const message = "hello";
+      const meta = { v: "v" };
 
       const logger = new LoggerBase();
       const log = logger._prepareLog(message, meta);
@@ -195,9 +195,9 @@ experiment('Base', () => {
       assert.deepEqual(log, Object.assign({ message }, meta));
     });
 
-    test('logger.error({ message, v })', () => {
-      const message = 'hello';
-      const meta = { message, v: 'v' };
+    test("logger.error({ message, v })", () => {
+      const message = "hello";
+      const meta = { message, v: "v" };
 
       const logger = new LoggerBase();
       const log = logger._prepareLog(meta);
@@ -205,7 +205,16 @@ experiment('Base', () => {
       assert.deepEqual(log, Object.assign(meta));
     });
 
-    test('throw if incorrect input', () => {
+    test("Error instance", () => {
+      const logger = new LoggerBase();
+
+      const error = new Error("message");
+      const serializedError = serializeError(error);
+
+      assert.deepEqual(logger._prepareLog(error), serializedError);
+    });
+
+    test("throw if incorrect input", () => {
       const logger = new LoggerBase();
 
       assert.throws(() => {
@@ -214,4 +223,3 @@ experiment('Base', () => {
     });
   });
 });
-
